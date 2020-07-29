@@ -1,0 +1,77 @@
+@layout('layouts/app')
+
+@section('content')
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-one-third">
+          <h2 class="title has-text-centered">Register</h2>
+
+          <form action="/register" method="post">
+            {{ csrfField() }}
+
+            <div class="field">
+              <label class="label">Name</label>
+
+              <div class="control">
+                <input
+                  type="text"
+                  class="input {{ flashMessages.get('errors.name') ? 'is-danger' : '' }}"
+                  name="name"
+                  value="{{ flashMessages.get('name') || '' }}"
+                >
+              </div>
+
+              @if (flashMessages.has('errors.name'))
+                <p class="help is-danger">
+                  {{ flashMessages.get('errors.name') }}
+                </p>
+              @endif
+            </div>
+
+            <div class="field">
+              <label class="label">Email</label>
+
+              <div class="control">
+                <input
+                  type="email"
+                  class="input {{ flashMessages.get('errors.email') ? 'is-danger' : '' }}"
+                  name="email"
+                  value="{{ flashMessages.get('email') || '' }}"
+                >
+              </div>
+
+              @if (flashMessages.has('errors.email'))
+                <p class="help is-danger">
+                  {{ flashMessages.get('errors.email') }}
+                </p>
+              @endif
+            </div>
+
+            <div class="field">
+              <label class="label">Password</label>
+
+              <div class="control">
+                <input
+                  type="password"
+                  class="input {{ flashMessages.get('errors.password') ? 'is-danger' : '' }}"
+                  name="password"
+                >
+              </div>
+
+              @if (flashMessages.has('errors.password'))
+                <p class="help is-danger">
+                  {{ flashMessages.get('errors.password') }}
+                </p>
+              @endif
+            </div>
+
+            <div class="control">
+              <button type="submit" class="button is-dark is-fullwidth">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+@endsection

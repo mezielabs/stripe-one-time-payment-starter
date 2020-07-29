@@ -1,0 +1,64 @@
+@layout('layouts/app')
+
+@section('styles')
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+@endsection
+
+@section('content')
+  <section class="hero is-light">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <div class="plyr__video-embed" id="player">
+              <iframe
+                src="{{ `https://www.youtube.com/embed/${lesson.videoId}?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1` }}"
+                allowfullscreen
+                allowtransparency
+                allow="autoplay"
+              ></iframe>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <h3 class="title is-4">Course Contents</h3>
+
+          <div class="lessons">
+            @each(lesson in course.lessons)
+              <a href="{{ `/watch/${course.slug}/${lesson.slug}` }}" class="has-text-dark">
+                <div class="is-flex lesson py-4">
+                  <div>
+                    <span class="mr-1">
+                      <i class="far fa-play-circle"></i>
+                    </span>
+                    {{ lesson.title }}
+                  </div>
+                  <div>
+                    <span class="mr-1">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    2:08
+                  </div>
+                </div>
+              </a>
+            @endeach
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+@endsection
+
+@section('scripts')
+  <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+
+  <script>
+    const player = new Plyr('#player');
+  </script>
+@endsection

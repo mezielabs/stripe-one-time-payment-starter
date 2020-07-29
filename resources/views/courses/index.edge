@@ -1,0 +1,39 @@
+@layout('layouts/app')
+
+@section('content')
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Courses</h1>
+
+      <div class="columns">
+        @each(course in courses)
+          <div class="column is-one-third">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image">
+                  <img src="{{ course.featuredImage }}" alt="{{ `${course.title} image` }}">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="content">
+                  <h3 class="title is-5 h-44">
+                    <a href="{{ `/courses/${course.slug}` }}" class="has-text-dark">
+                      {{ course.title }}
+                    </a>
+                  </h3>
+                  <div>
+                    {{ excerpt(course.description, 100) }}
+                  </div>
+
+                  <div class="mt-2 has-text-weight-semibold">
+                    {{ `$${course.price}` }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        @endeach
+      </div>
+    </div>
+  </section>
+@endsection

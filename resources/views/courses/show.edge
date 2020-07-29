@@ -1,0 +1,55 @@
+@layout('layouts/app')
+
+@section('content')
+  <section class="hero is-light has-text-centered">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <h1 class="title">
+              {{ course.title }}
+            </h1>
+            <p>
+              {{ course.description }}
+            </p>
+
+            <a
+              href="{{ `/checkout?course=${course.slug}` }}"
+              class="button is-dark mt-6"
+            >
+              Buy Now - {{ `$${course.price}` }}
+            </a>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <h3 class="title is-4">Course Contents</h3>
+
+          <div class="lessons">
+            @each(lesson in course.lessons)
+              <div class="is-flex lesson py-4">
+                <div>
+                  <span class="mr-1">
+                    <i class="far fa-play-circle"></i>
+                  </span>
+                  {{ lesson.title }}
+                </div>
+                <div>
+                  <span class="mr-1">
+                    <i class="far fa-clock"></i>
+                  </span>
+                  {{ lesson.duration }}
+                </div>
+              </div>
+            @endeach
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+@endsection

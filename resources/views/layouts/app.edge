@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Course Hub</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="/css/app.css">
+
+    @!section('styles')
+  </head>
+  <body>
+    <nav class="navbar is-dark">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">Course Hub</a>
+        </div>
+
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            @if(auth.isLoggedIn)
+            <a href="/my-courses" class="navbar-item">My Courses</a>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">{{ auth.user.name }}</a>
+                <div class="navbar-dropdown">
+                  <a
+                    href="/logout"
+                    class="navbar-item"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"
+                  >
+                    <span class="icon">
+                      <i class="fas fa-sign-out-alt"></i>
+                    </span>
+                    <span>Logout</span>
+                    <form id="logout-form" action="/logout" method="post">
+                      {{ csrfField() }}
+                    </form>
+                  </a>
+                </div>
+              </div>
+            @else
+              <a href="/register" class="navbar-item">Register</a>
+              <a href="/login" class="navbar-item">Log In</a>
+            @endif
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div>
+      @!section('content')
+    </div>
+
+    @!section('scripts')
+  </body>
+</html>
