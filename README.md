@@ -64,6 +64,12 @@ Run the migrations:
 node ace migration:run
 ```
 
+Run the database seeder:
+
+```bash
+node ace db:seed
+```
+
 Finally, start the application:
 
 ```bash
